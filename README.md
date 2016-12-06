@@ -16,7 +16,7 @@ Zadania projektowe wykonywane są w trzech grupach. Zadania projektowe należy r
 * 	wybrane widoki z aplikacji
 
 
- ##Aplikacja dostarczająca generyczny komponent do planowania (ang. Scheduler) - 6 osób:##
+###Aplikacja dostarczająca generyczny komponent do planowania (ang. Scheduler) - 6 osób:###
 *  	implementacja własnego komponentu kalendarza;
 *  	implementacja własnego komponentu czasu w postaci zegara, dane przechowywane w obiekcie np. Date#
 *  	implementacjaschedulera, czyli kalendarz w którym dla odkreślonychzasobów przypisuje się obiekty np. zasoby (osoby) i zadania
