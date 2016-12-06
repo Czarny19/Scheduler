@@ -1,4 +1,3 @@
-
 Założenia dla zadań projektowych
 Zadania projektowe wykonywane są w trzech grupach. Zadania projektowe należy realizować zgodnie z wybraną metodyką. Opracowane rozwiązania muszą spełniać poniższe założenia.
 
@@ -17,13 +16,13 @@ Zadania projektowe wykonywane są w trzech grupach. Zadania projektowe należy r
 	wybrane widoki z aplikacji
 
 
- Aplikacja dostarczająca generyczny komponent do planowania (ang. Scheduler) - 6 osób:
- 	implementacja własnego komponentu kalendarza;
- 	implementacja własnego komponentu czasu w postaci zegara, dane przechowywane w obiekcie np. Date
- 	implementacjaschedulera, czyli kalendarz w którym dla odkreślonychzasobów przypisuje się obiekty np. zasoby (osoby) i zadania
- 	możliwość definiowania notek z wykorzystaniem własnej implementacji notatnika
- 	mechanizm notyfikacji powiadamiający o zmianach
- 	mechanizm zdarzeniowego powiadamiania komponentu o zmianie danych w źródle danych
- 	scheduler powiadamiania o zadaniach/zaplanowanych obiektach, np. definiujemy zadanie startu o 10:20, scheduler o godzinie 10:20 powiadamia zdarzeniowo o akcji, mechanizm notyfikacji powiadamia użytkownika
- 	przenoszenie zadańpomiędzyrożnymi dniami, tygodniami, miesiącami (drag and drop)
- 	komponent Timeline (oś czasu) dla wizualizacji zadań danego dnia
+ #Aplikacja dostarczająca generyczny komponent do planowania (ang. Scheduler) - 6 osób:
+ 	#implementacja własnego komponentu kalendarza;
+ 	#implementacja własnego komponentu czasu w postaci zegara, dane przechowywane w obiekcie np. Date
+ 	#implementacjaschedulera, czyli kalendarz w którym dla odkreślonychzasobów przypisuje się obiekty np. zasoby (osoby) i zadania
+ 	#możliwość definiowania notek z wykorzystaniem własnej implementacji notatnika
+ 	#mechanizm notyfikacji powiadamiający o zmianach
+ 	#mechanizm zdarzeniowego powiadamiania komponentu o zmianie danych w źródle danych
+ 	#scheduler powiadamiania o zadaniach/zaplanowanych obiektach, np. definiujemy zadanie startu o 10:20, scheduler o godzinie 10:20 powiadamia zdarzeniowo o akcji, mechanizm notyfikacji powiadamia użytkownika
+ 	#przenoszenie zadańpomiędzyrożnymi dniami, tygodniami, miesiącami (drag and drop)
+ 	#komponent Timeline (oś czasu) dla wizualizacji zadań danego dnia
