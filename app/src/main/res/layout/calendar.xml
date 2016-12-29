@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+    <TextView
+
+        android:text="Pn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textSize="25sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp" />
+
+    <TextView
+        android:text="Wt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textSize="25sp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/textView1"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:text="Sr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="25sp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:text="Cz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textSize="25sp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:text="Nd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7"
+        android:textSize="25sp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/textView6"
+        android:layout_alignParentTop="true" />
+
+
+    <TextView
+        android:text="Pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textSize="25sp"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:text="Sb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:textSize="25sp"
+        android:layout_marginStart="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textView5" />
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="7"
+        android:verticalSpacing="1px"
+        android:horizontalSpacing="1px"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/textView7"
+        android:addStatesFromChildren="false"
+        android:scrollbarSize="1dp" />
+</RelativeLayout>
+

@@ -82,7 +82,6 @@ public class RadialPickerView extends View{
 
     private void drawText(Canvas canvas, int textSize,
                                  String[] texts, float[] textX, float[] textY, Paint paint) {
-        paint.setTextSize(textSize);
         for (int i = 0; i < 12; i++) {
             paint.setColor(Color.BLACK);
             canvas.drawText(texts[i], textX[i], textY[i], paint);
