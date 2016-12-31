@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.View;
 
 import pz.lab.scheduler.R;
@@ -18,9 +19,13 @@ public class RadialPickerView extends View{
     private static final String[] HOURS_12_TEXT = new String[12];
     private static final int[] MINUTES_NUMBERS = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55};
     private float cos[] = new float[12], sin[] = new float[12];
-    private int centerX, centerY, width, height;
+    private float centerX, centerY;
+    private int width, height;
     private int textInsets, hourTextSize;
+    private boolean drawSelectionCircle = false;
+    private float selectionCircleX, selectionCircleY, hourDistance;
     private float radius;
+    private float hourX[] = new float[12], hourY[] = new float[12];
     private Paint circlePaint = new Paint(), hour12Paint = new Paint();
     private static final String TAG = "RadialPicker";
     public RadialPickerView(Context context) {
@@ -55,10 +60,24 @@ public class RadialPickerView extends View{
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        calculateSelectorCoords(event.getX(), event.getY());
+        drawSelectionCircle=true;
+        invalidate();
+       return true;
+    }
+
+    private void calculateSelectorCoords(float touchX, float touchY){
+
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawCircle(canvas);
         drawHours(canvas);
+        if (drawSelectionCircle)
+            drawSelectionCircle(canvas);
     }
 
     private void drawCircle(Canvas canvas){
@@ -66,11 +85,16 @@ public class RadialPickerView extends View{
     }
 
     private void drawHours(Canvas canvas) {
-        float x[] = new float[12], y[] = new float[12];
-        calculatePositions(hour12Paint, hourTextSize, radius-textInsets, centerX, centerY, x,y);
-        drawText(canvas,hourTextSize,HOURS_12_TEXT,x,y,hour12Paint);
+        drawText(canvas,hourTextSize,HOURS_12_TEXT,hourX,hourY,hour12Paint);
     }
-    private void calculatePositions(Paint paint, int textSize, float radius, float xCenter, float yCenter,
+
+    private void drawSelectionCircle(Canvas canvas){
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        canvas.drawCircle(selectionCircleX,selectionCircleY,10, paint );
+    }
+
+    private void calculateHoursPositions(Paint paint, int textSize, float radius, float xCenter, float yCenter,
                                           float[] x, float[] y) {
         paint.setTextSize(textSize);
         yCenter -= (paint.descent() + paint.ascent()) / 2;
@@ -78,6 +102,9 @@ public class RadialPickerView extends View{
             x[i] = xCenter - radius * cos[i];
             y[i] = yCenter - radius * sin[i];
         }
+        float dfx = x[2]-x[1],
+                dfy = y[2]-y[1];
+        hourDistance = (float) (Math.sqrt(Math.pow(dfx,2)+Math.pow(dfy,2))/2);
     }
 
     private void drawText(Canvas canvas, int textSize,
@@ -92,10 +119,11 @@ public class RadialPickerView extends View{
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        centerX=(getWidth())/2;
-        centerY=(getHeight())/2;
+        centerX=(getWidth())/2.0f;
+        centerY=(getHeight())/2.0f;
         radius = Math.min(centerX,centerY);
         width=getWidth();
         height=getHeight();
+        calculateHoursPositions(hour12Paint, hourTextSize, radius-textInsets, centerX, centerY, hourX,hourY);
     }
 }
