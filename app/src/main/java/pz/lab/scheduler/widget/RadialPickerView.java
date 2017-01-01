@@ -68,16 +68,31 @@ public class RadialPickerView extends View{
     }
 
     private void calculateSelectorCoords(float touchX, float touchY){
-
+        int baseDeg;
+        if(touchX>=centerX && touchY<=centerY){
+            baseDeg = 0;
+        }else  if(touchX>=centerX && touchY>centerY){
+            baseDeg = 90;
+        }else  if(touchX<centerX && touchY>centerY){
+            baseDeg = 180;
+        }else{
+            baseDeg = 270;
+        }
+        double touchDeg = baseDeg + ((baseDeg/90)%2==0?-1:1)*( ((baseDeg/90)%2==0?-90:0) + Math.toDegrees(Math.atan( Math.abs(touchY-centerY)/Math.abs(touchX-centerX))) );
+        int selectedHour = (int) Math.round(touchDeg/30)%12;
+        selectionCircleX=hourX[selectedHour];
+        selectionCircleY=hourY[selectedHour];
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawCircle(canvas);
-        drawHours(canvas);
         if (drawSelectionCircle)
             drawSelectionCircle(canvas);
+        drawHours(canvas);
+
+
     }
 
     private void drawCircle(Canvas canvas){
@@ -91,7 +106,7 @@ public class RadialPickerView extends View{
     private void drawSelectionCircle(Canvas canvas){
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
-        canvas.drawCircle(selectionCircleX,selectionCircleY,10, paint );
+        canvas.drawCircle(selectionCircleX,selectionCircleY,25, paint );
     }
 
     private void calculateHoursPositions(Paint paint, int textSize, float radius, float xCenter, float yCenter,
