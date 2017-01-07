@@ -27,28 +27,38 @@ public class RadialPickerView extends View{
     private float textHeight;
     private int textInsets, hourTextSize;
     private boolean drawSelectionCircle = false;
-    private float selectionCircleX, selectionCircleY, labelsDistance;
+    private float selectionCircleX, selectionCircleY, labelsDistance, selectorRadius, selectorStroke;
     private float radius;
     private float hourX[] = new float[12], hourY[] = new float[12],
                 minuteX[] = new float[60], minuteY[] = new float[60];
-    private Paint circlePaint = new Paint(), hour12Paint = new Paint(), selectionPaint = new Paint();
+    private Paint circlePaint = new Paint(), hour12Paint = new Paint(), selectionPaint = new Paint(), selectionStrokePaint;
     private TimePickerModel timeModel;
     private static final String TAG = "RadialPicker";
     public RadialPickerView(Context context, AttributeSet atribSet) {
         super(context,atribSet);
 
         circlePaint.setAntiAlias(true);
-        circlePaint.setColor(Color.RED);
+        circlePaint.setColor(getResources().getColor(R.color.pickerBgDefault));
+
         setTimeModel(new TimePickerModel());
+
         selectionPaint.setAntiAlias(true);
-        selectionPaint.setColor(Color.BLUE);
+        selectionPaint.setColor(getResources().getColor(R.color.pickerSelector));
+
+        selectionStrokePaint = new Paint();
+        selectionStrokePaint.setColor(getResources().getColor(R.color.pickerSelectorCenter));
+
+        selectorRadius = getResources().getDimensionPixelSize(R.dimen.timepicker_selector_radius);
+        selectorStroke = getResources().getDimensionPixelSize(R.dimen.timepicker_selector_stroke);
+
+        textInsets = getResources().getDimensionPixelSize(R.dimen.timepicker_text_inset_normal);
+        hourTextSize = getResources().getDimensionPixelSize(R.dimen.timepicker_text_size_normal);
         hour12Paint.setAntiAlias(true);
-        hour12Paint.setTextSize(50);
+        hour12Paint.setTextSize(hourTextSize);
         hour12Paint.setColor(Color.BLACK);
         calculateConstans(60);
         convertToText();
-        textInsets = getResources().getDimensionPixelSize(R.dimen.timepicker_text_inset_normal);
-        hourTextSize = getResources().getDimensionPixelSize(R.dimen.timepicker_text_size_normal);
+
     }
 
     public TimePickerModel getTimeModel() {
@@ -166,7 +176,8 @@ public class RadialPickerView extends View{
 
     private void drawSelector(Canvas canvas){
         canvas.drawLine(centerX,centerY,selectionCircleX,(int)(selectionCircleY-(textHeight/2.0)),selectionPaint);
-        canvas.drawCircle(selectionCircleX,(int)(selectionCircleY-(textHeight/2.0)),25, selectionPaint);
+        canvas.drawCircle(selectionCircleX,(int)(selectionCircleY-(textHeight/2.0)),selectorRadius, selectionPaint);
+        canvas.drawCircle(selectionCircleX,(int)(selectionCircleY-(textHeight/2.0)),selectorStroke, selectionStrokePaint);
     }
 
     private void drawMinutes(Canvas canvas){

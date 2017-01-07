@@ -36,6 +36,7 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
         hour.setOnTouchListener(this);
         minute.setOnTouchListener(this);
         updateLabels();
+        changeSelectedLabelHighlight(TimePickerEvent.TimePart.HOUR);
     }
 
 
@@ -64,11 +65,11 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
 
     private void changeSelectedLabelHighlight(TimePickerEvent.TimePart timePart){
         if(timePart == TimePickerEvent.TimePart.HOUR){
-            hour.setTextColor(getResources().getColor(R.color.colorPrimary));
+            hour.setTextColor(getResources().getColor(R.color.pickerSelector));
             minute.setTextColor(getResources().getColor(R.color.labelDefault));
         }
         else{
-            minute.setTextColor(getResources().getColor(R.color.colorPrimary));
+            minute.setTextColor(getResources().getColor(R.color.pickerSelector));
             hour.setTextColor(getResources().getColor(R.color.labelDefault));
         }
     }

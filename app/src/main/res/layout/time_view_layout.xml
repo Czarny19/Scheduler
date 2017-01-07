@@ -6,10 +6,12 @@
     android:gravity="center">
 
     <TableRow
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="15dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -23,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/hourView"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/labelDefault"
                 android:textSize="30sp"
                 android:padding="5dp" />
 
@@ -32,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/doubleDotView"
                 android:textSize="30sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/labelDefault"
                 android:padding="5dp"
                 android:text="@string/doubleDot"
                 android:textAlignment="center" />
@@ -43,26 +45,34 @@
                 android:id="@+id/minuteView"
                 android:layout_weight="1"
                 android:textSize="30sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/labelDefault"
                 android:padding="5dp" />
 
         </LinearLayout>
     </TableRow>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="center">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="15dp"
+        android:background="@color/colorPrimary">
 
-        <view
-            class="pz.lab.scheduler.widget.timePicker.RadialPickerView"
-            android:id="@+id/radialPicker"
-            android:layout_width="match_parent"
-            android:layout_height="286dp"
-            android:textColor="@android:color/background_dark"
-            android:layout_gravity="center" />
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/colorPrimary">
+
+            <view
+                class="pz.lab.scheduler.widget.timePicker.RadialPickerView"
+                android:id="@+id/radialPicker"
+                android:layout_width="match_parent"
+                android:layout_height="286dp"
+                android:textColor="@android:color/background_dark"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </TableRow>
 
 </TableLayout>
