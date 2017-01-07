@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/hourView"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/doubleDotView"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+            android:padding="5dp"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/minuteView"
+            android:layout_weight="1"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+            android:padding="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center">
+
+        <view
+            class="pz.lab.scheduler.widget.timePicker.RadialPickerView"
+            android:id="@+id/radialPicker"
+            android:layout_width="match_parent"
+            android:layout_height="388dp"
+            android:textColor="@android:color/background_dark"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</GridLayout>
