@@ -1,6 +1,7 @@
 package pz.lab.scheduler.widget.timePicker;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,8 +20,8 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
     private TextView hour, minute, doubleDot;
     private TimePickerModel model;
     private RadialPickerView radialPicker;
-    public TimeView(Context context) {
-        super(context);
+    public TimeView(Context context, AttributeSet attributeSet) {
+        super(context,attributeSet);
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.time_view_layout, this, true);

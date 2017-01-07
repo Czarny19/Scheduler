@@ -13,8 +13,12 @@
     tools:context="pz.lab.scheduler.MainScreen"
     tools:showIn="@layout/activity_main_screen">
 
-    <TextView
+
+    <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        class="pz.lab.scheduler.widget.timePicker.TimeView"
+        android:id="@+id/view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

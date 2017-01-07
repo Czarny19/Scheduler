@@ -36,6 +36,7 @@ public class RadialPickerView extends View{
     private static final String TAG = "RadialPicker";
     public RadialPickerView(Context context, AttributeSet atribSet) {
         super(context,atribSet);
+
         circlePaint.setAntiAlias(true);
         circlePaint.setColor(Color.RED);
         setTimeModel(new TimePickerModel());
