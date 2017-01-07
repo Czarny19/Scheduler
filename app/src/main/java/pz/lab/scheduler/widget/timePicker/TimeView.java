@@ -17,7 +17,7 @@ import pz.lab.scheduler.R;
  */
 
 public class TimeView extends FrameLayout implements TimePickerListener, View.OnTouchListener{
-    private TextView hour, minute, doubleDot;
+    private TextView hour, minute, amView, pmView;
     private TimePickerModel model;
     private RadialPickerView radialPicker;
     public TimeView(Context context, AttributeSet attributeSet) {
@@ -30,7 +30,11 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
         hour = (TextView) findViewById(R.id.hourView);
         minute = (TextView) findViewById(R.id.minuteView);
         radialPicker = (RadialPickerView) findViewById(R.id.radialPicker);
-        doubleDot = (TextView) findViewById(R.id.doubleDotView);
+        amView = (TextView) findViewById(R.id.amView);
+        amView.setOnTouchListener(this);
+
+        pmView = (TextView) findViewById(R.id.pmView);
+        pmView.setOnTouchListener(this);
 
         radialPicker.setTimeModel(model);
         hour.setOnTouchListener(this);
@@ -48,7 +52,12 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
     }
 
     private void updateLabels(){
-        hour.setText(String.format("%1$02d", model.getHour()));
+        int hour = model.getHour();
+        if(hour==0&&model.getDayPart()== TimePickerModel.DayPart.PM)
+           model.setHour(12);
+        else if(hour==12&&model.getDayPart()== TimePickerModel.DayPart.AM)
+           model.setHour(0);
+        this.hour.setText(String.format("%1$02d", model.getHour()));
         minute.setText(String.format("%1$02d", model.getMinute()));
     }
     @Override
@@ -59,8 +68,19 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
         }else if(v==minute){
             radialPicker.setMinutes(true);
             changeSelectedLabelHighlight(TimePickerEvent.TimePart.MINUTE);
+        }else if(v==amView){
+            amView.setTextColor(getResources().getColor(R.color.pickerSelector));
+            pmView.setTextColor(getResources().getColor(R.color.labelDefault));
+            model.setDayPart(TimePickerModel.DayPart.AM);
+            model.fireTimeChange(TimePickerEvent.TimePart.HOUR);
         }
-        return false;
+        else if(v==pmView){
+            pmView.setTextColor(getResources().getColor(R.color.pickerSelector));
+            amView.setTextColor(getResources().getColor(R.color.labelDefault));
+            model.setDayPart(TimePickerModel.DayPart.PM);
+            model.fireTimeChange(TimePickerEvent.TimePart.HOUR);
+        }
+        return true;
     }
 
     private void changeSelectedLabelHighlight(TimePickerEvent.TimePart timePart){

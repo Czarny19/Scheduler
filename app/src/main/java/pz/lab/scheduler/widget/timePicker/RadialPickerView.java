@@ -143,8 +143,9 @@ public class RadialPickerView extends View{
             selectionCircleY = minuteY[timeModel.getMinute()];
         }
         else{
-            selectionCircleX = hourX[timeModel.getHour()];
-            selectionCircleY = hourY[timeModel.getHour()];
+
+            selectionCircleX = hourX[timeModel.getHour()%12];
+            selectionCircleY = hourY[timeModel.getHour()%12];
         }
     }
 
