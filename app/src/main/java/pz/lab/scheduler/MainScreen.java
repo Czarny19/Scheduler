@@ -7,7 +7,6 @@ import android.view.MenuItem;
 
 import pz.lab.scheduler.widget.Calendar;
 import pz.lab.scheduler.widget.RadialPickerView;
-import android.widget.GridView;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -26,15 +25,13 @@ public class MainScreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-
+       // RadialPickerView test = new RadialPickerView(this);
+       //        setContentView(test);
+       //        test.requestFocus();
         Calendar test= new Calendar(this);
-        //RadialPickerView test = new RadialPickerView(this);
-        setContentView(R.layout.calendar);
+        setContentView(test);
         test.requestFocus();
 
-
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
     }
 
     @Override
