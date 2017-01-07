@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -23,6 +24,7 @@ public class RadialPickerView extends View{
     private float cos[] = new float[60], sin[] = new float[60];
     private float centerX, centerY;
     private boolean minutes = false;
+    private float textHeight;
     private int textInsets, hourTextSize;
     private boolean drawSelectionCircle = false;
     private float selectionCircleX, selectionCircleY, labelsDistance;
@@ -39,7 +41,6 @@ public class RadialPickerView extends View{
         setTimeModel(new TimePickerModel());
         selectionPaint.setAntiAlias(true);
         selectionPaint.setColor(Color.BLUE);
-
         hour12Paint.setAntiAlias(true);
         hour12Paint.setTextSize(50);
         hour12Paint.setColor(Color.BLACK);
@@ -54,7 +55,11 @@ public class RadialPickerView extends View{
     }
 
     public void setTimeModel(TimePickerModel timeModel) {
-       this.timeModel = timeModel;
+        this.timeModel = timeModel;
+        readTimeFromModel();
+        setMinutes(false);
+        drawSelectionCircle=true;
+        invalidate();
     }
 
     private void calculateConstans(int lblsCount) {
@@ -80,7 +85,7 @@ public class RadialPickerView extends View{
         calculateSelectorCoords(event.getX(), event.getY(), minutes?60:12);
         drawSelectionCircle=true;
         invalidate();
-        if(!minutes&&(event.getAction()==MotionEvent.ACTION_DOWN)){
+        if(!minutes&&(event.getAction()==MotionEvent.ACTION_UP)){
             Handler handler = new Handler(Looper.getMainLooper());
             final Runnable r = new Runnable() {
                 public void run() {
@@ -127,8 +132,8 @@ public class RadialPickerView extends View{
             selectionCircleY = minuteY[timeModel.getMinute()];
         }
         else{
-            selectionCircleX = minuteX[timeModel.getHour()];
-            selectionCircleY = minuteY[timeModel.getHour()];
+            selectionCircleX = hourX[timeModel.getHour()];
+            selectionCircleY = hourY[timeModel.getHour()];
         }
     }
 
@@ -143,7 +148,7 @@ public class RadialPickerView extends View{
         super.onDraw(canvas);
         drawCircle(canvas);
         if (drawSelectionCircle)
-            drawSelectionCircle(canvas);
+            drawSelector(canvas);
         if(!minutes)
             drawHours(canvas);
         else
@@ -158,8 +163,9 @@ public class RadialPickerView extends View{
         drawText(canvas,hourTextSize,HOURS_12_TEXT,hourX,hourY,1,hour12Paint);
     }
 
-    private void drawSelectionCircle(Canvas canvas){
-        canvas.drawCircle(selectionCircleX,selectionCircleY,25, selectionPaint);
+    private void drawSelector(Canvas canvas){
+        canvas.drawLine(centerX,centerY,selectionCircleX,(int)(selectionCircleY-(textHeight/2.0)),selectionPaint);
+        canvas.drawCircle(selectionCircleX,(int)(selectionCircleY-(textHeight/2.0)),25, selectionPaint);
     }
 
     private void drawMinutes(Canvas canvas){
@@ -169,9 +175,10 @@ public class RadialPickerView extends View{
     private void drawText(Canvas canvas, int textSize,
                                  String[] texts, float[] textX, float[] textY, int indexStep, Paint paint) {
         paint.setTextSize(textSize);
+
         for (int i = 0; i < 12; i++) {
             paint.setColor(Color.BLACK);
-            canvas.drawText(texts[i], textX[i*indexStep], textY[i*indexStep], paint);
+            canvas.drawText(texts[i], textX[i*indexStep]-(paint.measureText(texts[i])/2), textY[i*indexStep], paint);
         }
     }
 
@@ -182,14 +189,19 @@ public class RadialPickerView extends View{
         centerY=(getHeight())/2.0f;
         radius = Math.min(centerX,centerY);
         //TODO not pixel density safe!!!
-      //  if(radius>300)
+        //if(radius>300)
         //    radius=300;
+        Rect bounds = new Rect();
+        hour12Paint.getTextBounds("1", 0, 1, bounds);
+        textHeight = bounds.height();
         calculatePositions(hour12Paint, hourTextSize, radius-textInsets, centerX, centerY, hourX,hourY);
         calculatePositions(hour12Paint, hourTextSize, radius-textInsets, centerX, centerY, minuteX, minuteY);
     }
 
+
+
     private void calculatePositions(Paint paint, int textSize, float radius, float xCenter, float yCenter,
-                                         float[] x, float[] y) {
+                                    float[] x, float[] y) {
         paint.setTextSize(textSize);
         yCenter -= (paint.descent() + paint.ascent()) / 2;
         for (int i = 0; i < x.length; i++) {

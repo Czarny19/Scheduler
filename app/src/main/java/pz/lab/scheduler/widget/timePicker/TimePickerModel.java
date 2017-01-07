@@ -25,6 +25,12 @@ public class TimePickerModel{
         this.dayPart = dayPart;
     }
 
+    public TimePickerModel(Date date) {
+        this();
+        setTime(date);
+    }
+
+
     public void addTimePickerListener(TimePickerListener listener){
         listeners.add(listener);
     }

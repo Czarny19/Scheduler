@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import pz.lab.scheduler.R;
 
 /**
@@ -22,7 +24,7 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.time_view_layout, this, true);
-        model = new TimePickerModel();
+        model = new TimePickerModel(new Date());
         model.addTimePickerListener(this);
         hour = (TextView) findViewById(R.id.hourView);
         minute = (TextView) findViewById(R.id.minuteView);
@@ -30,23 +32,23 @@ public class TimeView extends FrameLayout implements TimePickerListener, View.On
         doubleDot = (TextView) findViewById(R.id.doubleDotView);
 
         radialPicker.setTimeModel(model);
-
-        hour.setText("05");
         hour.setOnTouchListener(this);
         minute.setOnTouchListener(this);
-        doubleDot.setText(":");
-        minute.setText("21");
+        updateLabels();
     }
 
 
 
     @Override
     public void onTimeSelectionChange(TimePickerEvent event) {
-            hour.setText(String.format("%1$02d", model.getHour()));
-            minute.setText(String.format("%1$02d", model.getMinute()));
+            updateLabels();
             changeSelectedLabelHighlight(event.getSelectedTimePart());
     }
 
+    private void updateLabels(){
+        hour.setText(String.format("%1$02d", model.getHour()));
+        minute.setText(String.format("%1$02d", model.getMinute()));
+    }
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if(v==hour){
