@@ -22,7 +22,7 @@ public class Calendar extends View{
     private static int topHeigh=150;
     private static final String[] MONTHS = {"Styczen","Luty","Marzec","Kwiecien","Maj","Czerwiec","Lipiec","Sierpien","Wrzesien","Pazdziernik","Listopad","Grudzien"};
     private int widthBox, heightBox, width, height;
-    private int  hourTextSize, firstDay,monthDay,month,year,thisDay,thisMonth,thisYear;
+    private int  hourTextSize, firstDay,monthDay,month,year,thisDay,thisMonth,thisYear,yi=0,xi=0,selectedDay=0;
     private float x1,x2,y1,y2;
     private String currentDateandTime;
     private static float X_DIFF=100;
@@ -57,16 +57,30 @@ public class Calendar extends View{
                 x2 = event.getX();
                 float diffy=y2-y1;
                 float diffx=x2-x1;
-                if (diffy<-100)
+                if (diffy<-heightBox)
                 {
                     changedate(1);
                 }
-                if(diffy>100)
+                else if(diffy>heightBox)
                 {
                     changedate(-1);
                 }
-                if(diffy<=heightBox&&diffx<=widthBox){
 
+                if(Math.abs(diffy)<heightBox&&Math.abs(diffx)<widthBox) {
+                    for(int i=0;i<7;i++){
+                        if(x2>x[i]){
+                            xi=i;
+                        }
+                    }for(int i=0;i<7;i++){
+                        if(y2>y[i]){
+                            yi=i;
+                        }
+                    }
+
+                    selectedDay=yi*7+xi+1-firstDay;
+                    if(selectedDay<1)changedate(-1);
+                    if(selectedDay>MONTH_DAY_NUMBER[month])changedate(1);
+                    invalidate();
                 }
                 break;}
         }
@@ -121,9 +135,9 @@ public class Calendar extends View{
         super.onDraw(canvas);
         drawBox(canvas,x,y,firstDay,month);
         drawTxt(canvas);
-       // canvas.drawText(String.format("%d",today), 20, 1200, dayTextPaint);
-       // canvas.drawText(String.format("%d",month), 20, 1200, dayTextPaint);
-       // canvas.drawText(String.format("%d",firstDay), 60, 1200, dayTextPaint);
+        canvas.drawText(String.format("%d",xi), 20, 1200, dayTextPaint);
+        canvas.drawText(String.format("%d",yi), 50, 1200, dayTextPaint);
+        canvas.drawText(String.format("%d",selectedDay), 80, 1200, dayTextPaint);
        // canvas.drawText(String.format("%d",monthDay), 120, 1200, dayTextPaint);
         // canvas.drawText(String.format("%d",tmp), 160, 1200, dayTextPaint);
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import pz.lab.scheduler.widget.Calendar;
 
@@ -29,6 +30,7 @@ public class MainScreen extends AppCompatActivity {
       //  test.requestFocus();
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -16,10 +16,10 @@ import java.util.Date;
 
 import pz.lab.scheduler.R;
 
-public class CalendarView extends FrameLayout {
+public class CalendarView extends FrameLayout implements View.OnTouchListener{
 
     private  Calendar calendar;
-    private float x1,x2;
+    private int x1,y1;
 
     public CalendarView(Context context, AttributeSet atribSet) {
         super(context, atribSet);
@@ -29,8 +29,23 @@ public class CalendarView extends FrameLayout {
         inflater.inflate(R.layout.calendar_view_layout, this, true);
 
     }
-    public boolean onTouchEvent(View v,MotionEvent event)
-    {
-        return true;
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(v==calendar) {
+            float x= event.getX();
+            float y= event.getY();
+
+                    for(int i=0;i<7;i++){
+                        if(x>calendar.x[i]){
+                            x1=i;
+                        }
+                    }for(int i=0;i<7;i++){
+                        if(y>calendar.y[i]){
+                            y1=i;
+                        }
+                    }
+          //  calendar.setXY(x1,y1);
+            }
+        return false;
     }
 }
