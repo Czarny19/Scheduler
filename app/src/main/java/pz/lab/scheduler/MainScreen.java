@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import pz.lab.scheduler.widget.Calendar;
-import pz.lab.scheduler.widget.RadialPickerView;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -25,9 +24,6 @@ public class MainScreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-       // RadialPickerView test = new RadialPickerView(this);
-       //        setContentView(test);
-       //        test.requestFocus();
         Calendar test= new Calendar(this);
         setContentView(test);
         test.requestFocus();
