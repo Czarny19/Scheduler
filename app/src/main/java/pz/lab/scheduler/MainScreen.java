@@ -24,9 +24,9 @@ public class MainScreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-        Calendar test= new Calendar(this);
-        setContentView(test);
-        test.requestFocus();
+      //  Calendar test= new Calendar(this);
+     //   setContentView(test);
+      //  test.requestFocus();
 
     }
 
