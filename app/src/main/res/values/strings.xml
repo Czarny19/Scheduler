@@ -4,4 +4,6 @@
     <string name="doubleDot">:</string>
     <string name="amViewText">AM</string>
     <string name="pmViewText">PM</string>
+    <string name="Sel_Date">01.01.2016</string>
+    <string name="title_activity_timeline">timeline</string>
 </resources>
