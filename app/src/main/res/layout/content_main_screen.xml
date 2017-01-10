@@ -16,13 +16,20 @@
     <view
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="pz.lab.scheduler.widget.Calendar"
+        class="pz.lab.scheduler.widget.CalendarView"
         android:id="@+id/view"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
-
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/note_view_layout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        android:id="@+id/dayNote" />
 
 
 </RelativeLayout>

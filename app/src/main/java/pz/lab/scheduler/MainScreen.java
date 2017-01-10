@@ -1,25 +1,46 @@
 package pz.lab.scheduler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import pz.lab.scheduler.widget.Calendar;
+import java.util.Date;
 
-public class MainScreen extends AppCompatActivity {
+import pz.lab.scheduler.widget.Calendar;
+import pz.lab.scheduler.widget.DayPickerEvent;
+import pz.lab.scheduler.widget.DayPickerListener;
+import pz.lab.scheduler.widget.DayPickerModel;
+
+public class MainScreen extends AppCompatActivity implements DayPickerListener {
+    DayPickerModel model;
+
+    public void onTimeSelectionChange(DayPickerEvent event) {
+        //  updateLabels();
+        changeSelectedDayActivity(event.getSelectedDay());
+    }
+
+    private void changeSelectedDayActivity(Date selectedDay){
+        Intent intent = new Intent(this, NoteActivity.class);
+        startActivity(intent);
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+       // LayoutInflater inflater = getLayoutInflater();
+       // Calendar calendar = findViewById(R.layout.activity_main_screen).findViewById(R.id.class.);
+
+        model = new DayPickerModel(new Date());
+     //   this.addTimePickerListener(this);
 
     }
-    public void change(){
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
