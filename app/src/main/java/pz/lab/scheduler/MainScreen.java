@@ -37,8 +37,9 @@ public class MainScreen extends AppCompatActivity implements DayPickerListener {
        // LayoutInflater inflater = getLayoutInflater();
        // Calendar calendar = findViewById(R.layout.activity_main_screen).findViewById(R.id.class.);
 
-        model = new DayPickerModel(new Date());
+        //model = new DayPickerModel(new Date());
      //   this.addTimePickerListener(this);
+
 
     }
 
