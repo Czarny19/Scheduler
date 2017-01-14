@@ -17,7 +17,7 @@
     <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        class="pz.lab.scheduler.widget.timePicker.TimeView"
+        class="pz.lab.scheduler.widget.time.TimePickerView"
         android:id="@+id/view"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />

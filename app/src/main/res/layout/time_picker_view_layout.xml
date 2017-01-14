@@ -94,7 +94,7 @@
             android:background="@color/colorPrimary">
 
             <view
-                class="pz.lab.scheduler.widget.timePicker.RadialPickerView"
+                class="pz.lab.scheduler.widget.time.RadialPickerView"
                 android:id="@+id/radialPicker"
                 android:layout_width="match_parent"
                 android:layout_height="286dp"

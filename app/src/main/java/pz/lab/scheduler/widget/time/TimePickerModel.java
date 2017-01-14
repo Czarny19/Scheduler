@@ -1,18 +1,21 @@
-package pz.lab.scheduler.widget.timePicker;
+package pz.lab.scheduler.widget.time;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import pz.lab.scheduler.widget.time.event.TimePickerEvent;
+import pz.lab.scheduler.widget.time.event.TimePickerEventListener;
+
 /**
  * Created by Hakus on 2017-01-06.
  */
 public class TimePickerModel{
-    public enum DayPart{AM,PM};
+
     private int hour, minute;
     private DayPart dayPart;
-    private List<TimePickerListener> listeners;
+    private List<TimePickerEventListener> listeners;
 
     public TimePickerModel() {
         listeners = new ArrayList<>(4);
@@ -30,20 +33,24 @@ public class TimePickerModel{
         setTime(date);
     }
 
+    public TimePickerModel(long time) {
+        this();
+        setTime(time);
+    }
 
-    public void addTimePickerListener(TimePickerListener listener){
+
+    public void addTimePickerListener(TimePickerEventListener listener){
         listeners.add(listener);
     }
 
-    public void removeTimePickerListener(TimePickerListener listener){
+    public void removeTimePickerListener(TimePickerEventListener listener){
         listeners.remove(listener);
     }
 
     public long getTime(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        //TODO przygotować się na 24H, obsługa AM/PM
-        calendar.set(Calendar.HOUR,hour);
+        calendar.set(Calendar.HOUR,hour+(dayPart==DayPart.PM?12:0));
         calendar.set(Calendar.MINUTE,minute);
         return getTime();
     }
@@ -54,16 +61,30 @@ public class TimePickerModel{
 
     public void setTime(Date date){
         Calendar calendar = Calendar.getInstance();
+
         calendar.setTime(date);
-        hour = calendar.get(Calendar.HOUR);
+        hour = calendar.get(Calendar.HOUR)%12;
+        if(calendar.get(Calendar.AM_PM) == Calendar.PM)
+            dayPart=DayPart.PM;
+        else
+            dayPart=DayPart.AM;
         minute = calendar.get(Calendar.MINUTE);
+        fireTimeChange(TimePickerEvent.TimePart.BOTH);
+        fireDayPartChange(dayPart);
     }
 
     protected void fireTimeChange(TimePickerEvent.TimePart timePart){
         TimePickerEvent event = new TimePickerEvent();
         event.setSelectedTimePart(timePart);
-        for (TimePickerListener l : listeners) {
+        for (TimePickerEventListener l : listeners) {
             l.onTimeSelectionChange(event);
+        }
+    }
+    protected void fireDayPartChange(DayPart selectedDayPart){
+        TimePickerEvent event = new TimePickerEvent();
+        event.setSelectedDayPart(selectedDayPart);
+        for (TimePickerEventListener l : listeners) {
+            l.onDayPartChange(event);
         }
     }
 
