@@ -21,7 +21,14 @@
         <activity
             android:name=".Timeline"
             android:label="@string/title_activity_timeline"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <!-- Intent filter do wywalenia, potrzebny tylko do zmiany deafaultowej aktywności przy uruchamianiu -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
