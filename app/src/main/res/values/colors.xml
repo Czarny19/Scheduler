@@ -8,4 +8,6 @@
     <color name="pickerSelector">#d38bc34a</color>
     <color name="pickerSelectorCenter">#f6ff7f</color>
     <color name="pickerBgDefault">#ffffff</color>
+    <color name="BlueBackground">#95ABFF</color>
+    <color name="WhiteFont">#ffffff</color>
 </resources>
