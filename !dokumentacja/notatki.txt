@@ -1,0 +1,58 @@
+---------WYWALAMY PROWADZĄCEGO & ZASTANAWIAMY SIE CZY PRZENOSIĆ ZADANIA MIĘDZY TYGODNIAMI-----------------------------
+----------------------------------------------------------------------------------------------------------------------
+ZADANIE
+
+Data Od (godzina)
+Data Do (godzina)
+Notatka - treść
+Lista osób
+
+-- nie zmieniamy dat w zadaniu -> cofamy się do poprzedniego ekranu
+
+--------------------------------------
+EDYCJA ZADANIA
+
+
+
+
+--------------------------------------
+DZIEŃ
+
+Data
+Lista Zadań
+
+--------------------------------------
+KALENDARZ
+-> miesiąc -> tydzień -> dzień & timeline - przerysowanie komponentu
+- interfejs do nasłuchu zdarzenia (day selection listener)
+
+
+--------------------------------------
+TIMELINE
+
+Lista zadań
+
+-przesuwanie zadań w ramach jedego dnia (co 10 minut)
+
+--------------------------------------
+AKTYWNOŚĆ GŁÓWNA
+- przycisk do przerysowania komponentu kalendarza (miesiąc / tydzień etc)
+
+--------------------------------------
+ZEGAR
+
+
+
+--------------------------------------
+NOTATNIK
+- jedna aktywność
+- edycja notatki
+
+
+
+--------------------------------------
+FIREBASE ADAPTER
+
+
+
+--------------------------------------
