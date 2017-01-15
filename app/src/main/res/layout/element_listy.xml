@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/element_listy">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1.60"
         android:weightSum="1">
 
@@ -21,7 +21,7 @@
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/dayText"
                 android:textSize="25sp"
                 android:textAlignment="viewStart"
@@ -30,7 +30,7 @@
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/myText"
                 android:gravity="bottom"
                 android:layout_weight="0.38"
@@ -41,6 +41,14 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="14dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/taskList"
+            android:scrollbars="none" />
 
     </LinearLayout>
 </LinearLayout>

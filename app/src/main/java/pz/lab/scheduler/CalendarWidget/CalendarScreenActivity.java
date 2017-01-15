@@ -11,19 +11,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import pz.lab.scheduler.R;
 
-import static pz.lab.scheduler.R.id.date;
-import static pz.lab.scheduler.R.id.year;
-
 public class CalendarScreenActivity extends AppCompatActivity implements DayPickerListener {
    // public int NUM_ITEMS_PAGE   = 7;
 
-    private ElementAdapter ea;
+    private DayAdapter ea;
     private CalendarView calendar;
     float x1=0,x2=0;
     ListView lista;
@@ -108,7 +104,7 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
         Date dat1=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-day1);
         Date dat2=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+(6-day1));
 
-        ea=new ElementAdapter(this,dat1,dat2);
+        ea=new DayAdapter(this,dat1,dat2);
         lista.setAdapter(ea);
     }
 
