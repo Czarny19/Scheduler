@@ -1,4 +1,4 @@
-package pz.lab.scheduler.widget;
+package pz.lab.scheduler.CalendarWidget;
 
 import java.util.Date;
 

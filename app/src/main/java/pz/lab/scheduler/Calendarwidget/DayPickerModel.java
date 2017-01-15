@@ -1,4 +1,4 @@
-package pz.lab.scheduler.widget;
+package pz.lab.scheduler.CalendarWidget;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,13 +23,6 @@ public class DayPickerModel {
         setTime(date);
     }
 
-    public void addTimePickerListener(DayPickerListener listener){
-        listeners.add(listener);
-    }
-
-    public void removeTimePickerListener(DayPickerListener listener){
-        listeners.remove(listener);
-    }
 
     public long getDay(){
         Calendar calendar = Calendar.getInstance();
@@ -45,12 +38,5 @@ public class DayPickerModel {
         calendar.setTime(date);
     }
 
-    protected void fireTimeChange(Date selectedDate){
-        DayPickerEvent event = new DayPickerEvent();
-        event.setSelectedDay(selectedDate);
-        for (DayPickerListener l : listeners) {
-            l.onTimeSelectionChange(event);
-        }
-    }
 
 }

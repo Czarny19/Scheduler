@@ -1,4 +1,4 @@
-package pz.lab.scheduler.widget;
+package pz.lab.scheduler.CalendarWidget;
 
 /**
  * Created by Emilia on 08.01.2017.
