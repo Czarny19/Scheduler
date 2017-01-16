@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,8 +53,10 @@ public class DayAdapter extends ArrayAdapter<String> {//
     public static class ViewHolder{
         public TextView dayText;
         public TextView myText;
+        public TextView hour;
         public ListView taskList;
-       // public ImageView img;
+        public LinearLayout linLo;
+        //public ListView listaGodzin;
 
     }
 
@@ -64,11 +67,12 @@ public class DayAdapter extends ArrayAdapter<String> {//
             LayoutInflater layoutInflater = context.getLayoutInflater();
             rowView = layoutInflater.inflate(R.layout.element_listy, null, true);
             viewHolder = new ViewHolder();
-            viewHolder.taskList = (ListView) rowView.findViewById(R.id.taskList);
+            viewHolder.taskList = (ListView) rowView.findViewById(R.id.listaGodzin);
             viewHolder.dayText = (TextView) rowView.findViewById(R.id.dayText);
             viewHolder.myText = (TextView) rowView.findViewById(R.id.myText);
-           // viewHolder.img = (ImageView) rowView.findViewById(R.id.image) ;
-            //viewHolder.img.setImageDrawable(getResources().getDrawable(R.drawable.box_green));
+            viewHolder.hour = (TextView) rowView.findViewById(R.id.hour);
+            //viewHolder.taskList = (LinearLayout) rowView.findViewById(R.id.taskList);
+            viewHolder.linLo = (LinearLayout) rowView.findViewById(R.id.linLo);
             rowView.setTag(viewHolder);
 
         } else {
@@ -78,12 +82,22 @@ public class DayAdapter extends ArrayAdapter<String> {//
         if(today==gData)rowView.setBackgroundColor(Color.rgb(230, 230, 255));
         viewHolder.dayText.setText(DAYS[i]);
         viewHolder.myText.setText(+ calendar.get(Calendar.DATE) + " "+MONTHS[calendar.get(Calendar.MONTH)] +" "+  calendar.get(Calendar.YEAR) );
-        ArrayList<String> carL = new ArrayList<String>();
-        carL.addAll( Arrays.asList(DAYS) );
-
-        adapter = new ArrayAdapter<String>(context, R.layout.zadanie, carL);
-
+        adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1, DAYS);
+        adapter.getCount();
         viewHolder.taskList.setAdapter(adapter);
+        int totalHeight = 0;
+        for (int x = 0; x < adapter.getCount(); x++) {
+            View listItem = adapter.getView(i, null, viewHolder.taskList);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = viewHolder.taskList.getLayoutParams();
+        params.height = totalHeight + (viewHolder.taskList.getDividerHeight() * (viewHolder.taskList.getCount() - 1));
+        viewHolder.taskList.setLayoutParams(params);
+        viewHolder.taskList.requestLayout();
+        
+
         gData=new Date(calendar.get(Calendar.YEAR)-1900,calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE)+1);
         return rowView;
     }

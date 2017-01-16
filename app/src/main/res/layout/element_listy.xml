@@ -9,9 +9,10 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1.60"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/linLo">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -34,8 +35,8 @@
                 android:id="@+id/myText"
                 android:gravity="bottom"
                 android:layout_weight="0.38"
-                android:textAlignment="textEnd"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:textAlignment="viewEnd" />
         </LinearLayout>
 
         <Space
@@ -45,10 +46,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
-            android:id="@+id/taskList"
-            android:scrollbars="none" />
+            android:id="@+id/listaGodzin" />
+
 
     </LinearLayout>
 </LinearLayout>

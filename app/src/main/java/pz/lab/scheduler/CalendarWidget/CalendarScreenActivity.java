@@ -22,12 +22,16 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     private DayAdapter ea;
     private CalendarView calendar;
     float x1=0,x2=0;
-    ListView lista;
-    Date date;
+    private ListView list;
+    private Date date;
+    private View week;
     @Override
     public void onDaySelectionChange(DayPickerEvent event) {
         Toast.makeText(this, "Wybrano dzień", Toast.LENGTH_SHORT).show();
         changeSelectedDayActivity(event.getSelectedDay());
+    }
+    public void taster(){
+        Toast.makeText(this, "Scroll", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -44,15 +48,11 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        // LayoutInflater inflater = getLayoutInflater();
-        // Calendar calendar = findViewById(R.layout.activity_main_screen).findViewById(R.id.class.);
-
-        //   this.addTimePickerListener(this);
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.addTimePickerListener(this);
-        final View week=(View)findViewById(R.id.week);
-        lista=(ListView)findViewById(R.id.weekList);
-        lista.setOnTouchListener(new View.OnTouchListener() {
+        week= findViewById(R.id.week);
+        list=(ListView)findViewById(R.id.weekList);
+        week.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()){
@@ -105,7 +105,7 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
         Date dat2=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+(6-day1));
 
         ea=new DayAdapter(this,dat1,dat2);
-        lista.setAdapter(ea);
+        list.setAdapter(ea);
     }
 
     @Override
