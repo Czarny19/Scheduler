@@ -47,7 +47,7 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.calendar_activity_layout);
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.addTimePickerListener(this);
         week= findViewById(R.id.week);

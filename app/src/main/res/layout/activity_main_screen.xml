@@ -7,36 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context="pz.lab.scheduler.CalendarWidget.CalendarScreenActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        <ToggleButton
-            android:text="ToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/toggleButton"
-            android:layout_weight="1"
-            android:checked="true"
-            android:textOff="Tydzien"
-            android:textOn="Miesiac"
-            android:textAlignment="textStart" />
-
-    </android.support.design.widget.AppBarLayout>
-
     <include layout="@layout/content_main_screen" />
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/try
 </android.support.design.widget.CoordinatorLayout>
