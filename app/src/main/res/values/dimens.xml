@@ -14,4 +14,6 @@
     <dimen name="timepicker_text_size_inner">12sp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
+
 </resources>

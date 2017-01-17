@@ -6,4 +6,8 @@
     <string name="pmViewText">PM</string>
     <string name="Sel_Date">01.01.2016</string>
     <string name="title_activity_timeline">timeline</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="configure">Configure</string>
+
 </resources>

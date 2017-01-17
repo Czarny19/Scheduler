@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_collapseParallaxMultiplier="1.0"
+    android:orientation="vertical"
+    android:background="#FFF111">
+
+    <TextView
+        android:text="Year"
+        android:textAlignment="viewEnd"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:padding="5dp"
+        android:id="@+id/year"
+        android:background="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:text="Day Month"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:textAlignment="viewEnd"
+        android:layout_height="46dp"
+        android:background="#FFFFFF"
+        android:id="@+id/date"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <EditText
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textPersonName"
+        android:text="Wpisz notatke"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:id="@+id/note"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp" />
+</LinearLayout>
