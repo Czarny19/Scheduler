@@ -21,14 +21,17 @@ import pz.lab.scheduler.R;
 
 public class CalendarView extends View{
 
-    private static final int[] MONTH_DAY_NUMBER ={31,28,31,30,31,30,31,31,30,31,30,31};
-    private static final String[] DAYS = {"PN","WT","SR","CZ","PT","SB","ND"};
-    private static final String[] MONTHS = {"Styczen","Luty","Marzec","Kwiecien","Maj","Czerwiec","Lipiec","Sierpien","Wrzesien","Pazdziernik","Listopad","Grudzien"};
+    // static final int[] monthDayNumber ={31,28,31,30,31,30,31,31,30,31,30,31};
+    //private static final String[] days = {"PN","WT","SR","CZ","PT","SB","ND"};
+    //private static final String[] months = {"Styczen","Luty","Marzec","Kwiecien","Maj","Czerwiec","Lipiec","Sierpien","Wrzesien","Pazdziernik","Listopad","Grudzien"};
     private Date[] lista={new Date(2017-1900,1,1),new Date(2017-1900,1,1),new Date(2017-1900,1,13)};
     private Date[] lista1={new Date(2017-1900,2,5),new Date(2017-1900,2,3),new Date(2017-1900,2,15)};
+
     private static final String[] DAY_TEXT = new String[31];
     private int tasksDays[]=new int[31];
 
+    private String[]days,months;
+    private int[] monthDayNumber;
     private static int topHeigh=150;
     private int widthBox, heightBox, width, height;
     private float x1,x2,y1,y2;
@@ -42,6 +45,7 @@ public class CalendarView extends View{
     float x[] = new float[7], y[] = new float[7];
     private static final String TAG = "Calendar";
     private List<DayPickerListener> listeners;
+
     public CalendarView(Context context, AttributeSet atribSet) {
 
         super(context,atribSet);
@@ -51,6 +55,9 @@ public class CalendarView extends View{
         dayTextPaint.setTextSize(50);
         dayTextPaint.setColor(Color.BLACK);
         taskPaint.setColor(Color.	rgb(255, 128, 159));
+        days = context.getResources().getStringArray(R.array.short_week_days);
+        months = context.getResources().getStringArray(R.array.months);
+        monthDayNumber = context.getResources().getIntArray(R.array.months_day_number);
         firstDayDate();
         model=false;
         convertToText();
@@ -62,11 +69,11 @@ public class CalendarView extends View{
         this.dayModel = timeModel;
         setModel(false);
     }
+
     public void setModel(boolean model) {
         this.model = model;
         invalidate();
     }
-
 
     public void addTimePickerListener(DayPickerListener listener){
         listeners.add(listener);
@@ -88,8 +95,7 @@ public class CalendarView extends View{
         return date;
     }
 
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         switch(event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
@@ -107,39 +113,38 @@ public class CalendarView extends View{
                 else if(diffy>heightBox){
                     changedate(-1);
                 }
-
-                yi=0;xi=0;
-                if(Math.abs(diffy)<heightBox&&Math.abs(diffx)<widthBox) {
-                    for(int i=0;i<7;i++){
-                        if(x2>x[i]){
-                            xi=i;
-                        }
-                    }for(int i=0;i<7;i++){
-                        if(y2>y[i]){
-                            yi=i;
-                        }
-                    }
-
-                    selectedDay=yi*7+xi+1-firstDay;
-                    selectedDayDate=new Date(year-1900,month,selectedDay);
-                    if(selectedDay<1){changedate(-1);invalidate();}
-                    else {
-                        if (selectedDay > MONTH_DAY_NUMBER[month]) {
-                            changedate(1);
-                            invalidate();
-                        } else {
-                            fireTimeChange(today);
-                        }
-                    }
-
-
-                }
+                daySelect(diffy,diffx);
                 break;}
         }
         return true;
     }
 
-    
+    public void daySelect(float diffy, float diffx){
+        yi=0;xi=0;
+        if(Math.abs(diffy)<heightBox&&Math.abs(diffx)<widthBox) {
+            for(int i=0;i<7;i++){
+                if(x2>x[i]){
+                    xi=i;
+                }
+            }for(int i=0;i<7;i++){
+                if(y2>y[i]){
+                    yi=i;
+                }
+            }
+            selectedDay=yi*7+xi+1-firstDay;
+            selectedDayDate=new Date(year-1900,month,selectedDay);
+            if(selectedDay<1){changedate(-1);invalidate();}
+            else {
+                if (selectedDay > monthDayNumber[month]) {
+                    changedate(1);
+                    invalidate();
+                } else {
+                    fireTimeChange(selectedDayDate);
+                }
+            }
+        }
+    }
+
     public void getTasksDays(int c){
         for(int i=0;i<31;i++)tasksDays[i]=0;
         Calendar cal=Calendar.getInstance();
@@ -165,6 +170,10 @@ public class CalendarView extends View{
         month= tmp.get(Calendar.MONTH);
         day= tmp.get(Calendar.DATE);
         firstDay=(5+tmp.get(Calendar.DAY_OF_WEEK))%7;
+        if(month==1&&year%4==0){
+            monthDayNumber[1]=29;
+        }
+        else monthDayNumber[1]=28;
         getTasksDays(month);
 
     }
@@ -211,7 +220,7 @@ public class CalendarView extends View{
             if(i>=day1){
                 boxPaint.setColor(Color.rgb(91,104,219));
             }
-            if(i>=MONTH_DAY_NUMBER[monthNr]+day1){
+            if(i>= monthDayNumber[monthNr]+day1){
                 boxPaint.setColor(Color.rgb(188,192,228));
             }
             if(i%7==0){j++;}
@@ -223,7 +232,7 @@ public class CalendarView extends View{
     }
 
     private void drawTxt(Canvas canvas) {
-        drawTextHeader(canvas,DAYS,x,y,dayTextPaint);
+        drawTextHeader(canvas, days,x,y,dayTextPaint);
         drawText(canvas,hourTextSize,DAY_TEXT,x,y,dayTextPaint,firstDay,month);
     }
 
@@ -238,7 +247,7 @@ public class CalendarView extends View{
     private void drawTextHeader(Canvas canvas, String[] texts, float[] textX, float[] textY, Paint paint) {
         dayTextPaint.setTextSize(80);
         paint.setColor(Color.rgb(60,50,100));
-        canvas.drawText(year + " " +MONTHS[month] ,30 , 60,paint);
+        canvas.drawText(year + " " + months[month] ,30 , 60,paint);
         for(int i=0;i<7;i++){
             dayTextPaint.setTextSize(70);
             paint.setColor(Color.rgb(7,19,122));
@@ -251,18 +260,18 @@ public class CalendarView extends View{
         for (int i = 0; i < 42; i++) {
             if(day!=0){
                 if (monthNr == 0) {
-                    x = MONTH_DAY_NUMBER[11] - day;
+                    x = monthDayNumber[11] - day;
                     day--;
                 }
                 else {
-                    x = MONTH_DAY_NUMBER[monthNr - 1] - day;
+                    x = monthDayNumber[monthNr - 1] - day;
                     day--;
                 }
                 if(day==0)
                 {flaga=1;}
             }
 
-            else if(x>=MONTH_DAY_NUMBER[monthNr]&&flaga==0){
+            else if(x>= monthDayNumber[monthNr]&&flaga==0){
                 x=0;
                 flaga=2;
             }
@@ -283,16 +292,12 @@ public class CalendarView extends View{
                 else midleX=(int)paint.getTextSize()/4-7;
             }
             canvas.drawText(texts[x], textX[i%7]+ midleX, textY[j]+paint.getTextSize()-5, paint);
-            //rysowanie znaczników zadań
-           // for(int xi=0; xi<lista.length;xi++) {
-                //if (i - (day1 - 1) == tasksDays[xi]) {
+
             if(tasksDays[x]==1&&flaga==0){
                     if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT) {
                         canvas.drawCircle(textX[i % 7] + widthBox / 2, textY[j] + heightBox * 3 / 4, paint.getTextSize() / 4, taskPaint);
                     }else canvas.drawCircle(textX[i % 7] + widthBox *3 / 4, textY[j] + heightBox  / 2, paint.getTextSize() / 4, taskPaint);
-                   // break;
                 }
-            //}
             x++;
         }
     }

@@ -1,6 +1,7 @@
 package pz.lab.scheduler.CalendarWidget;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -25,7 +26,8 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     float x1=0,x2=0;
     private ListView list;
     private Date date;
-    private View week;
+   // Bundle newBundy = new Bundle();
+    //private View week;
    // @Override
     public void onDaySelectionChange(DayPickerEvent event) {
         Toast.makeText(this, "Wybrano dzień", Toast.LENGTH_SHORT).show();
@@ -39,7 +41,6 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     public void taster(){
         Toast.makeText(this, "Scroll", Toast.LENGTH_SHORT).show();
     }
-
 
     private void changeSelectedDayActivity(Date selectedDay) {
         Intent intent = new Intent(this, DayActivity.class);
@@ -55,18 +56,6 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.addTimePickerListener(this);
 
-    }
-
-    private void loadList(Date date)
-    {   int day1;
-        Calendar cal=Calendar.getInstance();
-        cal.setTime(date);
-        day1=(5+cal.get(Calendar.DAY_OF_WEEK))%7;
-        Date dat1=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-day1);
-        Date dat2=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+(6-day1));
-
-        ea=new DayAdapter(this,dat1,dat2);
-        list.setAdapter(ea);
     }
 
     @Override
@@ -90,6 +79,7 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
         return super.onOptionsItemSelected(item);
     }
 }
+
 
 
 

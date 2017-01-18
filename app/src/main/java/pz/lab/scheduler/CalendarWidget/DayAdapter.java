@@ -27,25 +27,28 @@ import pz.lab.scheduler.R;
 
 public class DayAdapter extends ArrayAdapter<String> {//
     private Activity context;
-    private static final String[] DAYS = {"Poniedziałek","Wtorek","Sroda","Czwartek","Piatek","Sobota","Niedziela"};
-    private static final String[] MONTHS = {"Styczen","Luty","Marzec","Kwiecien","Maj","Czerwiec","Lipiec","Sierpien","Wrzesien","Pazdziernik","Listopad","Grudzien"};
-    private Date startData;
-    private Date endData;
+    private  String[] days,months,hours;
+   // private  String[] months = {"Styczen","Luty","Marzec","Kwiecien","Maj","Czerwiec","Lipiec","Sierpien","Wrzesien","Pazdziernik","Listopad","Grudzien"};
+    //private Date[] lista={new Date(2017-1900,1,1,2,15),new Date(2017-1900,1,1,3,13),new Date(2017-1900,1,13,15,2)};
     private ArrayAdapter<String> adapter ;
-    private Date gData;
+    private Date gData,today=new Date();
+   // private String[] hours;
    // private Adapter tl;
-    private Date today=new Date();
+   // private Date ;
     private Calendar calendar=Calendar.getInstance();
 
-    public DayAdapter(Activity context, Date start, Date end) {
-        super(context, R.layout.element_listy, DAYS);
+    public DayAdapter(Activity context, Date start, Date end, String[] days, String[] months) {
+        super(context, R.layout.element_listy, days);
         this.context = context;
-        this.startData = start;
+       // this.startData = start;
         this.gData=start;
-        this.endData = end;
+       // this.endData = end;
+        this.days=days;
+        this.months=months;
         Calendar cal =Calendar.getInstance();
         cal.setTime(new Date());
         today= new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE));
+        hours = this.context.getResources().getStringArray(R.array.hours);
 
 
     }
@@ -55,7 +58,7 @@ public class DayAdapter extends ArrayAdapter<String> {//
         public TextView myText;
         public TextView hour;
         public ListView taskList;
-        public LinearLayout linLo;
+        //public LinearLayout linLo;
         //public ListView listaGodzin;
 
     }
@@ -70,9 +73,6 @@ public class DayAdapter extends ArrayAdapter<String> {//
             viewHolder.taskList = (ListView) rowView.findViewById(R.id.listaGodzin);
             viewHolder.dayText = (TextView) rowView.findViewById(R.id.dayText);
             viewHolder.myText = (TextView) rowView.findViewById(R.id.myText);
-            viewHolder.hour = (TextView) rowView.findViewById(R.id.hour);
-            //viewHolder.taskList = (LinearLayout) rowView.findViewById(R.id.taskList);
-            viewHolder.linLo = (LinearLayout) rowView.findViewById(R.id.linLo);
             rowView.setTag(viewHolder);
 
         } else {
@@ -80,11 +80,13 @@ public class DayAdapter extends ArrayAdapter<String> {//
         }
         calendar.setTime(gData);
         if(today==gData)rowView.setBackgroundColor(Color.rgb(230, 230, 255));
-        viewHolder.dayText.setText(DAYS[i]);
-        viewHolder.myText.setText(+ calendar.get(Calendar.DATE) + " "+MONTHS[calendar.get(Calendar.MONTH)] +" "+  calendar.get(Calendar.YEAR) );
-        adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1, DAYS);
-        adapter.getCount();
+        viewHolder.dayText.setText(days[i]);
+        calendar.set( Calendar.DATE,calendar.get(Calendar.DATE )+i);
+        viewHolder.myText.setText( calendar.get(Calendar.DATE ) + " "+months[calendar.get(Calendar.MONTH)] +" "+  calendar.get(Calendar.YEAR) );
+        adapter = new DayTaskListAdapter(context, calendar.getTime(),hours);
+
         viewHolder.taskList.setAdapter(adapter);
+
         int totalHeight = 0;
         for (int x = 0; x < adapter.getCount(); x++) {
             View listItem = adapter.getView(i, null, viewHolder.taskList);
@@ -98,7 +100,7 @@ public class DayAdapter extends ArrayAdapter<String> {//
         viewHolder.taskList.requestLayout();
         
 
-        gData=new Date(calendar.get(Calendar.YEAR)-1900,calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE)+1);
+       // gData=new Date(calendar.get(Calendar.YEAR)-1900,calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE)+1);
         return rowView;
     }
 }

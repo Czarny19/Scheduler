@@ -1,12 +1,16 @@
 package pz.lab.scheduler.CalendarWidget;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Calendar;
@@ -30,13 +34,19 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
     private ListView list;
     private Context context;
     private Date date;
+    private String[]days,months;
+
 
     public DayPickerView(Context context, AttributeSet attributeSet) {
         super(context,attributeSet);
         this.context=context;
+        days = this.context.getResources().getStringArray(R.array.week_days);
+        months = this.context.getResources().getStringArray(R.array.months);
+
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.calendar_view_layout, this, true);
+
         button = (ToggleButton) findViewById(R.id.toggleButton);
         button.setOnClickListener(new OnClickListener() {
             @Override
@@ -50,7 +60,6 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.setDayPickerModel(model);
         list=(ListView)findViewById(R.id.weekList);
-
         week= (View)findViewById(R.id.week);
         week.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -69,7 +78,7 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
             }
             case MotionEvent.ACTION_UP: {
                 x2 = event.getX();
-                weekChange();
+             //   weekChange();
                 break;
             }
         }
@@ -90,27 +99,30 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
 
     public void buttonClick() {
             if(button.isChecked()){
-                calendar.setVisibility(View.VISIBLE);
-                week.setVisibility((View.GONE));
-            }
-            else{
                 calendar.setVisibility(View.GONE);
                 week.setVisibility((View.VISIBLE));
+                model.setModel(true);
                 date=calendar.getDate();
                 loadList(date);
+
+            }
+            else{
+                calendar.setVisibility(View.VISIBLE);
+                model.setModel(false);
+                week.setVisibility((View.GONE));
             }
         }
 
-    private void loadList(Date date)
-    {   int day1;
+    private void loadList(Date date) {
+        int day1;
         Calendar cal=Calendar.getInstance();
         cal.setTime(date);
         day1=(5+cal.get(Calendar.DAY_OF_WEEK))%7;
         Date dat1=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-day1);
         Date dat2=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+(6-day1));
 
-       // ea=new DayAdapter(context,dat1,dat2);
-       // list.setAdapter(ea);
+        ea= new DayAdapter((Activity) context,dat1,dat2,days,months);
+        list.setAdapter(ea);
     }
 
     public void removeTimePickerListener(DayPickerListener listener) {
@@ -150,6 +162,7 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
 
     @Override
     public void onModelSelectionChange(DayPickerEvent event) {
-
     }
+
+
 }
