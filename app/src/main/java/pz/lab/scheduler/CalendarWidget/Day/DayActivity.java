@@ -1,4 +1,4 @@
-package pz.lab.scheduler.CalendarWidget;
+package pz.lab.scheduler.CalendarWidget.Day;
 
 import android.content.Intent;
 import android.graphics.Color;

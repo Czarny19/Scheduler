@@ -6,42 +6,44 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.FrameLayout;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 
+import pz.lab.scheduler.CalendarWidget.event.DayPickerEvent;
+import pz.lab.scheduler.CalendarWidget.event.DayPickerListener;
 import pz.lab.scheduler.R;
 
 public class CalendarView extends View{
 
     private static final int[] MONTH_DAY_NUMBER ={31,28,31,30,31,30,31,31,30,31,30,31};
     private static final String[] DAYS = {"PN","WT","SR","CZ","PT","SB","ND"};
-    private static int topHeigh=150;
     private static final String[] MONTHS = {"Styczen","Luty","Marzec","Kwiecien","Maj","Czerwiec","Lipiec","Sierpien","Wrzesien","Pazdziernik","Listopad","Grudzien"};
+    private Date[] lista={new Date(2017-1900,1,1),new Date(2017-1900,1,1),new Date(2017-1900,1,13)};
+    private Date[] lista1={new Date(2017-1900,2,5),new Date(2017-1900,2,3),new Date(2017-1900,2,15)};
+    private static final String[] DAY_TEXT = new String[31];
+    private int tasksDays[]=new int[31];
+
+    private static int topHeigh=150;
     private int widthBox, heightBox, width, height;
     private float x1,x2,y1,y2;
     public int currentDay=0,currentMonth=0,currentYear=0,firstDay=0,month=0,year=0,day=0,selectedDay=0;
-    private Date[] lista={new Date(2017-1900,1,1),new Date(2017-1900,1,1),new Date(2017-1900,1,13)};
-    private Date[] lista1={new Date(2017-1900,2,5),new Date(2017-1900,2,3),new Date(2017-1900,2,15)};
-    private int tasksDays[]=new int[31];
     private int  hourTextSize,yi=0,xi=0;
-    private Date today,selectedDayDate= new Date();
-    public Date date;
-    private static final String[] DAY_TEXT = new String[31];
+    private Date today,date,selectedDayDate= new Date();
+    public boolean model;
+    public DayPickerModel dayModel;
+
     private Paint boxPaint = new Paint(), dayTextPaint = new Paint(),taskPaint=new Paint();
     float x[] = new float[7], y[] = new float[7];
     private static final String TAG = "Calendar";
     private List<DayPickerListener> listeners;
     public CalendarView(Context context, AttributeSet atribSet) {
+
         super(context,atribSet);
         boxPaint.setAntiAlias(true);
         boxPaint.setColor(Color.BLUE);
@@ -49,10 +51,20 @@ public class CalendarView extends View{
         dayTextPaint.setTextSize(50);
         dayTextPaint.setColor(Color.BLACK);
         taskPaint.setColor(Color.	rgb(255, 128, 159));
-        getdate();
+        firstDayDate();
+        model=false;
         convertToText();
         hourTextSize = getResources().getDimensionPixelSize(R.dimen.timepicker_text_size_normal);
         listeners = new ArrayList<>();
+    }
+
+    public void setDayPickerModel(DayPickerModel timeModel) {
+        this.dayModel = timeModel;
+        setModel(false);
+    }
+    public void setModel(boolean model) {
+        this.model = model;
+        invalidate();
     }
 
 
@@ -63,12 +75,17 @@ public class CalendarView extends View{
     public void removeTimePickerListener(DayPickerListener listener){
         listeners.remove(listener);
     }
+
     protected void fireTimeChange(Date selectedDate){
         DayPickerEvent event = new DayPickerEvent();
         event.setSelectedDay(selectedDate);
         for (DayPickerListener l : listeners) {
             l.onDaySelectionChange(event);
         }
+    }
+
+    public Date getDate(){
+        return date;
     }
 
     public boolean onTouchEvent(MotionEvent event)
@@ -121,6 +138,8 @@ public class CalendarView extends View{
         }
         return true;
     }
+
+    
     public void getTasksDays(int c){
         for(int i=0;i<31;i++)tasksDays[i]=0;
         Calendar cal=Calendar.getInstance();
@@ -137,10 +156,8 @@ public class CalendarView extends View{
         currentYear= tmp.get(Calendar.YEAR);
         currentMonth= tmp.get(Calendar.MONTH);
         currentDay= tmp.get(Calendar.DATE);
-        //currentYear=Integer.parseInt(yearF.format(dat));
-       // currentMonth=Integer.parseInt(monthF.format(dat));
-        //currentDay=Integer.parseInt(dayF.format(dat));
     }
+
     public void setMonthInf(Date dat){
         Calendar tmp=Calendar.getInstance();
         tmp.setTime(dat);
@@ -149,25 +166,18 @@ public class CalendarView extends View{
         day= tmp.get(Calendar.DATE);
         firstDay=(5+tmp.get(Calendar.DAY_OF_WEEK))%7;
         getTasksDays(month);
-        //year=Integer.parseInt(yearF.format(dat));
-        //month=Integer.parseInt(monthF.format(dat));
-        //day=Integer.parseInt(dayF.format(dat));
-       // firstDay=(6+dat.getDay())%7;
+
     }
 
+    private void firstDayDate(){
 
-
-    private void getdate(){
-
-      //  yearF = new SimpleDateFormat("yyyy");
-       // monthF = new SimpleDateFormat("MM");
-        //dayF = new SimpleDateFormat("dd");
         today = new Date();
         setInf(today);
         date= new Date(currentYear-1900,currentMonth,1);
         setMonthInf(date);
 
     };
+
     public void changedate(int side){
         date.setMonth(month+side);
         setMonthInf(date);
@@ -236,7 +246,6 @@ public class CalendarView extends View{
         }
     }
 
-
     private void drawText(Canvas canvas, int textSize,String[] texts, float[] textX, float[] textY, Paint paint,int day1,int monthNr) {
         int x=0, j=-1,midleX=0,flaga=0,day=day1;
         for (int i = 0; i < 42; i++) {
@@ -287,7 +296,6 @@ public class CalendarView extends View{
             x++;
         }
     }
-
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

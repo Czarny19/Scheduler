@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import pz.lab.scheduler.CalendarWidget.Day.DayActivity;
+import pz.lab.scheduler.CalendarWidget.event.DayPickerEvent;
+import pz.lab.scheduler.CalendarWidget.event.DayPickerListener;
 import pz.lab.scheduler.R;
 
 public class CalendarScreenActivity extends AppCompatActivity implements DayPickerListener {
@@ -25,11 +26,16 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     private ListView list;
     private Date date;
     private View week;
-    @Override
+   // @Override
     public void onDaySelectionChange(DayPickerEvent event) {
         Toast.makeText(this, "Wybrano dzień", Toast.LENGTH_SHORT).show();
         changeSelectedDayActivity(event.getSelectedDay());
     }
+
+    @Override
+    public void onModelSelectionChange(DayPickerEvent event) {
+    }
+
     public void taster(){
         Toast.makeText(this, "Scroll", Toast.LENGTH_SHORT).show();
     }
@@ -37,65 +43,20 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
 
     private void changeSelectedDayActivity(Date selectedDay) {
         Intent intent = new Intent(this, DayActivity.class);
-
         selectedDay.toString();
         intent.putExtra("date", selectedDay.toString());
         startActivity(intent);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar_activity_layout);
+        setContentView(R.layout.content_calendar_screen);
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.addTimePickerListener(this);
-        week= findViewById(R.id.week);
-        list=(ListView)findViewById(R.id.weekList);
-        week.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                case MotionEvent.ACTION_DOWN: {
-                    x1 = event.getX();
-                    break;}
-                case MotionEvent.ACTION_UP: {
-                    x2 = event.getX();
-                    if(x2-x1<-200){
-                    Calendar cal=Calendar.getInstance();
-                    cal.setTime(date);
-                    date=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+7);
-                    loadList(date);}
-                    if(x2-x1>200){
-                        Calendar cal=Calendar.getInstance();
-                        cal.setTime(date);
-                        date=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-7);
-                        loadList(date);}
-                    // Do what you want
-                    break;}
 
-                }return true;
-            }
-        });
-
-        final ToggleButton tB = (ToggleButton) findViewById(R.id.toggleButton);
-        tB.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                if(tB.isChecked()){
-                    calendar.setVisibility(View.VISIBLE);
-                    week.setVisibility((View.GONE));
-                }
-                else{
-                    calendar.setVisibility(View.GONE);
-                    week.setVisibility((View.VISIBLE));
-                    date=calendar.date;
-                    loadList(date);
-                }
-            }
-        });
     }
+
     private void loadList(Date date)
     {   int day1;
         Calendar cal=Calendar.getInstance();
