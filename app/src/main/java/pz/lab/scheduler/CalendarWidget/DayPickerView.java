@@ -20,9 +20,7 @@ import pz.lab.scheduler.CalendarWidget.event.DayPickerEvent;
 import pz.lab.scheduler.CalendarWidget.event.DayPickerListener;
 import pz.lab.scheduler.R;
 
-/**
- * Created by Hakus on 2017-01-06.
- */
+
 
 public class DayPickerView extends FrameLayout implements DayPickerListener, View.OnTouchListener{
     private ToggleButton button;
@@ -78,19 +76,19 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
             }
             case MotionEvent.ACTION_UP: {
                 x2 = event.getX();
-             //   weekChange();
+               //weekChange(); //to nie dziala tu
                 break;
             }
         }
     }
 
     public void weekChange(){
-        if(x2-x1<-200){
+        if(x2-x1<-500){
             Calendar cal=Calendar.getInstance();
             cal.setTime(date);
             date=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+7);
             loadList(date);}
-        if(x2-x1>200){
+        if(x2-x1>500){
             Calendar cal=Calendar.getInstance();
             cal.setTime(date);
             date=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-7);
@@ -116,12 +114,21 @@ public class DayPickerView extends FrameLayout implements DayPickerListener, Vie
     private void loadList(Date date) {
         int day1;
         Calendar cal=Calendar.getInstance();
+        Calendar cal2=Calendar.getInstance();
+        cal.setTime(new Date());
         cal.setTime(date);
-        day1=(5+cal.get(Calendar.DAY_OF_WEEK))%7;
-        Date dat1=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-day1);
-        Date dat2=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+(6-day1));
 
-        ea= new DayAdapter((Activity) context,dat1,dat2,days,months);
+        Date dat1,dat2;
+        if(cal.get(Calendar.MONTH)==cal2.get(Calendar.MONTH)){
+            day1=(5+cal2.get(Calendar.DAY_OF_WEEK))%7;
+            dat1=new Date(cal2.get(Calendar.YEAR)-1900,cal2.get(Calendar.MONTH),cal2.get(Calendar.DATE)-day1);
+        }
+        else{
+            day1=(5+cal.get(Calendar.DAY_OF_WEEK))%7;
+            dat1=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)-day1);
+            dat2=new Date(cal.get(Calendar.YEAR)-1900,cal.get(Calendar.MONTH),cal.get(Calendar.DATE)+(6-day1));
+        }
+        ea= new DayAdapter((Activity) context,dat1,days,months);
         list.setAdapter(ea);
     }
 
