@@ -1,5 +1,6 @@
 package pz.lab.scheduler;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -21,8 +22,14 @@ public class MainScreen extends AppCompatActivity {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_main_screen);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();        
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
