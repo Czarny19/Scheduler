@@ -42,7 +42,7 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     private void changeSelectedDayActivity(Date selectedDay) {
         Intent intent = new Intent(this, NewTaskActivity.class);
         selectedDay.toString();
-        intent.putExtra("date", selectedDay.toString());
+        intent.putExtra("date", selectedDay);
         startActivity(intent);
     }
 
