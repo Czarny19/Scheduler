@@ -32,7 +32,12 @@
         <activity
             android:name=".NewTaskActivity"
             android:label="@string/new_task_title"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TimePickerDialog"
+            android:label="@string/title_activity_time_picker_dialog"
+            android:theme="@style/Theme.AppCompat.Dialog">
+    </activity>
     </application>
 
 </manifest>

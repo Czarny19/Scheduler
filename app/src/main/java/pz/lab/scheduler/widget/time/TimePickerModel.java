@@ -1,5 +1,6 @@
 package pz.lab.scheduler.widget.time;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,7 +12,7 @@ import pz.lab.scheduler.widget.time.event.TimePickerEventListener;
 /**
  * Created by Hakus on 2017-01-06.
  */
-public class TimePickerModel{
+public class TimePickerModel implements Serializable{
 
     private int hour, minute;
     private DayPart dayPart;
@@ -50,9 +51,9 @@ public class TimePickerModel{
     public long getTime(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR,hour+(dayPart==DayPart.PM?12:0));
+        calendar.set(Calendar.HOUR_OF_DAY,hour+(dayPart==DayPart.PM?12:0));
         calendar.set(Calendar.MINUTE,minute);
-        return getTime();
+        return calendar.getTime().getTime();
     }
 
     public void setTime(long time) {
