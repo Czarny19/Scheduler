@@ -13,61 +13,80 @@
     tools:context="pz.lab.scheduler.NewTaskActivity"
     tools:showIn="@layout/activity_new_task">
 
-    <TextView
-        android:text="@string/start_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignParentStart="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:text="@string/change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/end_time_button"
-        android:layout_below="@+id/textView5"
-        android:layout_alignStart="@+id/textView5"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="22dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="@string/start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:layout_alignBottom="@+id/textView5"
+                android:layout_alignParentStart="true" />
 
-    <CheckBox
-        android:text="@string/all_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/all_day_checkbox"
-        android:layout_below="@+id/start_time_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="28dp" />
+            <Button
+                android:text="@string/change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/end_time_button"
+                android:layout_below="@+id/textView5"
+                android:layout_alignStart="@+id/textView5"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="22dp" />
 
-    <Button
-        android:text="@string/change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/start_time_button"
-        android:layout_alignBaseline="@+id/end_time_button"
-        android:layout_alignBottom="@+id/end_time_button"
-        android:layout_alignEnd="@+id/all_day_checkbox" />
+            <CheckBox
+                android:text="@string/all_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/all_day_checkbox"
+                android:layout_below="@+id/start_time_button"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="28dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/task_title"
-        android:inputType="text"
-        android:hint="@string/task_name"
-        android:layout_marginTop="48dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+            <Button
+                android:text="@string/change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/start_time_button"
+                android:layout_alignBaseline="@+id/end_time_button"
+                android:layout_alignBottom="@+id/end_time_button"
+                android:layout_alignEnd="@+id/all_day_checkbox" />
 
-    <TextView
-        android:text="@string/end_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5"
-        android:layout_marginTop="28dp"
-        android:layout_below="@+id/task_title"
-        android:layout_alignParentEnd="true" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/task_title"
+                android:inputType="text"
+                android:hint="@string/task_name"
+                android:layout_marginTop="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
 
+            <TextView
+                android:text="@string/end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView5"
+                android:layout_marginTop="28dp"
+                android:layout_below="@+id/task_title"
+                android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:layout_marginTop="16dp"
+                android:id="@+id/note"
+                android:hint="Notatka"
+                android:layout_below="@+id/all_day_checkbox"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

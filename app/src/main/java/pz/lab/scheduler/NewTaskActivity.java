@@ -25,7 +25,7 @@ public class NewTaskActivity extends AppCompatActivity {
     private CheckBox allDayBox;
     private Button endTimeButton, startTimeButton;
     private Date selectedDay;
-    private EditText taskTitle;
+    private EditText taskTitle, taskNote;
     private long endTime, startTime;
     private DatabaseReference databaseReference;
     private static final int END_TIME_CODE = 2, START_TIME_CODE=1;
@@ -49,6 +49,7 @@ public class NewTaskActivity extends AppCompatActivity {
         updateStartTimeLabel();
 
         taskTitle = (EditText) findViewById(R.id.task_title);
+        taskNote = (EditText) findViewById(R.id.note);
         allDayBox = (CheckBox) findViewById(R.id.all_day_checkbox);
         allDayBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,7 +84,6 @@ public class NewTaskActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.cancel) {
             finish();
         }else if(id==R.id.save){
@@ -152,6 +152,7 @@ public class NewTaskActivity extends AppCompatActivity {
         task.setDateEnd(buildDateForTask(endTime));
         task.setId(key);
         task.setName(taskTitle.getText().toString());
+        task.setNote(taskNote.getText().toString());
         databaseReference.child(key).setValue(task);
         return true;
     }

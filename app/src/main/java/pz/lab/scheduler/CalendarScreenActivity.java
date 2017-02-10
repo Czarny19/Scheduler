@@ -52,7 +52,6 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
         setContentView(R.layout.content_calendar_screen);
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.addTimePickerListener(this);
-
     }
 
     @Override
