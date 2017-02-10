@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,9 +36,17 @@ public class NewTaskActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("tasks");
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+
         selectedDay = (Date) getIntent().getExtras().get("date");
+        startTime = selectedDay.getTime();
+        prepareInitialEndTime(startTime);
+
+
+
         endTimeButton = (Button) findViewById(R.id.end_time_button);
         startTimeButton = (Button) findViewById(R.id.start_time_button);
+        updateEndTimeLabel();
+        updateStartTimeLabel();
 
         taskTitle = (EditText) findViewById(R.id.task_title);
         allDayBox = (CheckBox) findViewById(R.id.all_day_checkbox);
@@ -78,8 +87,8 @@ public class NewTaskActivity extends AppCompatActivity {
         if (id == R.id.cancel) {
             finish();
         }else if(id==R.id.save){
-            saveTask();
-            finish();
+            if(saveTask())
+                finish();
         }
         return false;
     }
@@ -91,17 +100,33 @@ public class NewTaskActivity extends AppCompatActivity {
         startActivityForResult(picker,timeCode);
     }
 
+    private long prepareInitialEndTime(long time){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        calendar.set(Calendar.HOUR_OF_DAY, getHour(time)+1);
+        calendar.set(Calendar.MINUTE, getMinute((time)));
+        return calendar.getTime().getTime();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == END_TIME_CODE){
             endTime = data.getExtras().getLong("time");
-            endTimeButton.setText(String.format("%02d", getHour(endTime))+":"+String.format("%02d", getMinute(endTime)));
+            updateEndTimeLabel();
         }
 
         if(requestCode == START_TIME_CODE){
             startTime = data.getExtras().getLong("time");
-            startTimeButton.setText(String.format("%02d", getHour(startTime))+":"+String.format("%02d", getMinute(startTime)));
+            updateStartTimeLabel();
         }
+    }
+
+    private void updateEndTimeLabel(){
+        endTimeButton.setText(String.format("%02d", getHour(endTime))+":"+String.format("%02d", getMinute(endTime)));
+    }
+
+    private void updateStartTimeLabel(){
+        startTimeButton.setText(String.format("%02d", getHour(startTime))+":"+String.format("%02d", getMinute(startTime)));
     }
 
     private int getHour(long time){
@@ -116,7 +141,11 @@ public class NewTaskActivity extends AppCompatActivity {
         return calendar.get(Calendar.MINUTE);
     }
 
-    private void saveTask(){
+    private boolean saveTask(){
+        if(TextUtils.isEmpty(taskTitle.getText().toString())) {
+            taskTitle.setError("Musisz podać tytuł");
+            return false;
+        }
         String key = databaseReference.push().getKey();
         Task task = new Task();
         task.setDateStart(buildDateForTask(startTime));
@@ -124,6 +153,7 @@ public class NewTaskActivity extends AppCompatActivity {
         task.setId(key);
         task.setName(taskTitle.getText().toString());
         databaseReference.child(key).setValue(task);
+        return true;
     }
 
     private Date buildDateForTask(long time){

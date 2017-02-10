@@ -10,4 +10,5 @@
     <color name="pickerBgDefault">#ffffff</color>
     <color name="BlueBackground">#95ABFF</color>
     <color name="WhiteFont">#ffffff</color>
+    <color name="error">#f44336</color>
 </resources>
