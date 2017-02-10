@@ -1,23 +1,20 @@
-package pz.lab.scheduler.CalendarWidget;
+package pz.lab.scheduler.widget.calendar;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import pz.lab.scheduler.CalendarWidget.event.DayPickerEvent;
-import pz.lab.scheduler.CalendarWidget.event.DayPickerListener;
+import pz.lab.scheduler.widget.calendar.event.DayPickerEvent;
+import pz.lab.scheduler.widget.calendar.event.DayPickerListener;
 import pz.lab.scheduler.R;
 
 

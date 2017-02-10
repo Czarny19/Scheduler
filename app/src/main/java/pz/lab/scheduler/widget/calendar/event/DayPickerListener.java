@@ -1,4 +1,4 @@
-package pz.lab.scheduler.CalendarWidget.event;
+package pz.lab.scheduler.widget.calendar.event;
 
 /**
  * Created by Hakus on 2017-01-06.

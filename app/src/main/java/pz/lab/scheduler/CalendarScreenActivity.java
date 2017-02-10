@@ -1,22 +1,19 @@
-package pz.lab.scheduler.CalendarWidget;
+package pz.lab.scheduler;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.Date;
 
-import pz.lab.scheduler.CalendarWidget.Day.DayActivity;
-import pz.lab.scheduler.CalendarWidget.event.DayPickerEvent;
-import pz.lab.scheduler.CalendarWidget.event.DayPickerListener;
-import pz.lab.scheduler.R;
+import pz.lab.scheduler.widget.calendar.CalendarView;
+import pz.lab.scheduler.widget.calendar.DayAdapter;
+import pz.lab.scheduler.widget.calendar.event.DayPickerEvent;
+import pz.lab.scheduler.widget.calendar.event.DayPickerListener;
 
 public class CalendarScreenActivity extends AppCompatActivity implements DayPickerListener {
    // public int NUM_ITEMS_PAGE   = 7;
@@ -43,7 +40,7 @@ public class CalendarScreenActivity extends AppCompatActivity implements DayPick
     }
 
     private void changeSelectedDayActivity(Date selectedDay) {
-        Intent intent = new Intent(this, DayActivity.class);
+        Intent intent = new Intent(this, NewTaskActivity.class);
         selectedDay.toString();
         intent.putExtra("date", selectedDay.toString());
         startActivity(intent);

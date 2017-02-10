@@ -16,7 +16,7 @@
             android:id="@+id/toggleButton" />
 
         <view
-                class="pz.lab.scheduler.CalendarWidget.CalendarView"
+                class="pz.lab.scheduler.widget.calendar.CalendarView"
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

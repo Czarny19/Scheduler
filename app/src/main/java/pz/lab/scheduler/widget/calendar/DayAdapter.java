@@ -1,25 +1,16 @@
-package pz.lab.scheduler.CalendarWidget;
+package pz.lab.scheduler.widget.calendar;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import pz.lab.scheduler.R;
 

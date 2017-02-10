@@ -13,7 +13,7 @@
     <view
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="pz.lab.scheduler.CalendarWidget.DayPickerView"
+        class="pz.lab.scheduler.widget.calendar.DayPickerView"
         android:id="@+id/view"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />

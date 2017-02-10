@@ -8,34 +8,31 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainScreen"
             android:configChanges="orientation"
             android:label="@string/app_name">
-            <intent-filter><action android:name="android.intent.action.MAIN" /></intent-filter>
-
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
-
         <activity
-            android:name=".CalendarWidget.CalendarScreenActivity"
+            android:name=".CalendarScreenActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".Timeline"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
-        <activity android:name=".CalendarWidget.Day.DayActivity"></activity>
-
-		
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CalendarWidget.Day.DayActivity" />
+        <activity
+            android:name=".NewTaskActivity"
+            android:label="@string/new_task_title"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

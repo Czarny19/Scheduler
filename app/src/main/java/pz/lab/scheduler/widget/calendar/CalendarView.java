@@ -1,4 +1,4 @@
-package pz.lab.scheduler.CalendarWidget;
+package pz.lab.scheduler.widget.calendar;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -15,8 +15,8 @@ import java.util.Date;
 import java.util.List;
 
 
-import pz.lab.scheduler.CalendarWidget.event.DayPickerEvent;
-import pz.lab.scheduler.CalendarWidget.event.DayPickerListener;
+import pz.lab.scheduler.widget.calendar.event.DayPickerEvent;
+import pz.lab.scheduler.widget.calendar.event.DayPickerListener;
 import pz.lab.scheduler.R;
 
 public class CalendarView extends View{
