@@ -15,7 +15,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,17 +59,6 @@
                 android:layout_alignBottom="@+id/end_time_button"
                 android:layout_alignEnd="@+id/all_day_checkbox" />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/task_title"
-                android:inputType="text"
-                android:hint="@string/task_name"
-                android:layout_marginTop="48dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
-
             <TextView
                 android:text="@string/end_time"
                 android:layout_width="wrap_content"
@@ -78,7 +70,7 @@
 
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:layout_marginTop="16dp"
@@ -87,6 +79,27 @@
                 android:layout_below="@+id/all_day_checkbox"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/task_title"
+                android:inputType="text"
+                android:hint="@string/task_name"
+                android:layout_marginTop="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:text="Dodaj osoby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addUserButton"
+                android:layout_below="@+id/note"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="23dp" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

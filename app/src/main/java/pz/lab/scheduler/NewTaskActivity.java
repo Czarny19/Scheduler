@@ -20,15 +20,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 import pz.lab.scheduler.model.Task;
+import pz.lab.scheduler.widget.UserListDialog;
 
 public class NewTaskActivity extends AppCompatActivity {
     private CheckBox allDayBox;
-    private Button endTimeButton, startTimeButton;
+    private Button endTimeButton, startTimeButton, addUsersButton;
     private Date selectedDay;
     private EditText taskTitle, taskNote;
     private long endTime, startTime;
     private DatabaseReference databaseReference;
-    private static final int END_TIME_CODE = 2, START_TIME_CODE=1;
+    private static final int END_TIME_CODE = 2, START_TIME_CODE=1, USER_CODE=3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,14 @@ public class NewTaskActivity extends AppCompatActivity {
         startTime = selectedDay.getTime();
         prepareInitialEndTime(startTime);
 
+        addUsersButton = (Button) findViewById(R.id.addUserButton);
+        addUsersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               showUserDialog();
 
+            }
+        });
 
         endTimeButton = (Button) findViewById(R.id.end_time_button);
         startTimeButton = (Button) findViewById(R.id.start_time_button);
@@ -98,6 +106,11 @@ public class NewTaskActivity extends AppCompatActivity {
         Intent picker = new Intent(this, TimePickerDialog.class);
         picker.putExtra("returnCode", timeCode);
         startActivityForResult(picker,timeCode);
+    }
+
+    private void showUserDialog(){
+        Intent picker = new Intent(this, UserListDialog.class);
+        startActivityForResult(picker,USER_CODE);
     }
 
     private long prepareInitialEndTime(long time){

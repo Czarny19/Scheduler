@@ -28,7 +28,6 @@
         <activity
             android:name=".Timeline"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".CalendarWidget.Day.DayActivity" />
         <activity
             android:name=".NewTaskActivity"
             android:label="@string/new_task_title"
@@ -36,8 +35,11 @@
         <activity
             android:name=".TimePickerDialog"
             android:label="@string/title_activity_time_picker_dialog"
-            android:theme="@style/Theme.AppCompat.Dialog">
-    </activity>
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity
+            android:name=".widget.UserListDialog"
+            android:label="@string/title_activity_user_list_dialog"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
     </application>
 
 </manifest>

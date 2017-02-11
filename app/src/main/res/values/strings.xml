@@ -25,6 +25,7 @@
     <string name="set">Ustaw</string>
     <string name="save">Zapisz</string>
     <string name="cancel">Odrzuć</string>
+    <string name="title_activity_user_list_dialog">UserListDialog</string>
 
 
 </resources>

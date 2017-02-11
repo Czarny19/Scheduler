@@ -1,6 +1,7 @@
 package pz.lab.scheduler.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Hakus on 2017-01-15.
@@ -8,6 +9,7 @@ import java.util.Date;
 
 public class Task {
     String note, id, name;
+    List<String> people;
     Date dateStart;
     Date dateEnd;
 
