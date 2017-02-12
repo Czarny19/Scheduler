@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303fa3</color>
+    <color name="colorAccent">#54bc37</color>
+    <color name="windowBackgroud">#555555</color>
+    <color name="labelDefault">#ffffff</color>
+    <color name="pickerSelector">#d38bc34a</color>
+    <color name="pickerSelectorCenter">#f6ff7f</color>
+    <color name="pickerBgDefault">#ffffff</color>
+    <color name="BlueBackground">#95ABFF</color>
+    <color name="WhiteFont">#ffffff</color>
+    <color name="error">#f44336</color>
 </resources>

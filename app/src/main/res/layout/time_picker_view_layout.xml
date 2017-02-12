@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="15dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/hourView"
+                android:textColor="@color/labelDefault"
+                android:textSize="36sp"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/doubleDotView"
+                android:textSize="36sp"
+                android:textColor="@color/labelDefault"
+                android:padding="5dp"
+                android:text="@string/doubleDot"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/minuteView"
+                android:layout_weight="1"
+                android:textSize="36sp"
+                android:textColor="@color/labelDefault"
+                android:padding="5dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/amView"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/labelDefault"
+                    android:padding="5dp"
+                    android:text="@string/amViewText" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/pmView"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/labelDefault"
+                    android:padding="5dp"
+                    android:text="@string/pmViewText" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="15dp"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:background="@color/colorPrimary">
+
+            <view
+                class="pz.lab.scheduler.widget.time.RadialPickerView"
+                android:id="@+id/radialPicker"
+                android:layout_width="match_parent"
+                android:layout_height="286dp"
+                android:textColor="@android:color/background_dark"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </TableRow>
+
+</TableLayout>
