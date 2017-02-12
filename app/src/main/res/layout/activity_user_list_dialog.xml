@@ -7,8 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context="pz.lab.scheduler.widget.UserListDialog">
 
-
-
     <include layout="@layout/content_user_list_dialog" />
 
 

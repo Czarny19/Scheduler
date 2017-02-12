@@ -1,11 +1,26 @@
 package pz.lab.scheduler.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Hakus on 2017-02-10.
  */
 
-public class User {
-    private String name, surname, id, userName;
+public class User implements Serializable{
+    private String name;
+    private String surname;
+    private String id;
+    private String userName;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    private String uid;
 
     public String getName() {
         return name;
